@@ -8,7 +8,7 @@ RUN \
   yum install -y epel-release && \
   yum update -y && \
   `# Install build tools. Note: perl needed to compile openssl...` \
-  yum install -y inotify-tools wget tar gzip make gcc perl pcre-devel zlib-devel && \
+  yum install -y inotify-tools wget tar gzip make gcc perl pcre-devel zlib-devel readline-devel && \
 
   `# Install newest openssl...` \
   wget -O /tmp/openssl.tgz https://www.openssl.org/source/openssl-1.0.2-latest.tar.gz && \
@@ -21,6 +21,15 @@ RUN \
   make && make install_sw && \
   cd && rm -rf /tmp/openssl* && \
 
+  `# Install LUA...` \
+  cd /usr/src && \
+  curl -R -O http://www.lua.org/ftp/lua-5.3.0.tar.gz && \
+  tar zxf lua-5.3.0.tar.gz && \
+  cd lua-5.3.0 && \
+  make linux && \
+  make INSTALL_TOP=/opt/lua53 install && \
+  rm -rf /usr/src/lua* && \
+
   `# Install HAProxy...` \
   wget -O /tmp/haproxy.tgz http://www.haproxy.org/download/${HAPROXY_MJR_VERSION}/src/haproxy-${HAPROXY_VERSION}.tar.gz && \
   tar -zxvf /tmp/haproxy.tgz -C /tmp && \
@@ -28,6 +37,7 @@ RUN \
   make \
     TARGET=linux2628 USE_LINUX_TPROXY=1 USE_ZLIB=1 USE_REGPARM=1 USE_PCRE=1 USE_PCRE_JIT=1 \
     USE_OPENSSL=1 SSL_INC=/usr/include SSL_LIB=/usr/lib ADDLIB=-ldl \
+    USE_LUA=yes LUA_LIB=/opt/lua53/lib/ LUA_INC=/opt/lua53/include/ LDFLAGS=-ldl \
     CFLAGS="-O2 -g -fno-strict-aliasing -DTCP_USER_TIMEOUT=18" && \
   make install && \
   rm -rf /tmp/haproxy* && \

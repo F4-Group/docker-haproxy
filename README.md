@@ -1,41 +1,6 @@
 # HAProxy Load Balancer
-[![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=master)](https://travis-ci.org/million12/docker-haproxy)  
-[![GitHub Open Issues](https://img.shields.io/github/issues/million12/docker-haproxy.svg)](https://github.com/million12/docker-haproxy/issues)
-[![GitHub Stars](https://img.shields.io/github/stars/million12/docker-haproxy.svg)](https://github.com/million12/docker-haproxy)
-[![GitHub Forks](https://img.shields.io/github/forks/million12/docker-haproxy.svg)](https://github.com/million12/docker-haproxy)  
-[![Stars on Docker Hub](https://img.shields.io/docker/stars/million12/haproxy.svg)](https://hub.docker.com/r/million12/haproxy)
-[![Pulls on Docker Hub](https://img.shields.io/docker/pulls/million12/haproxy.svg)](https://hub.docker.com/r/million12/haproxy)  
-[![](https://images.microbadger.com/badges/version/million12/haproxy.svg)](http://microbadger.com/images/million12/haproxy)
-[![](https://images.microbadger.com/badges/license/million12/haproxy.svg)](http://microbadger.com/images/million12/haproxy)
-[![](https://images.microbadger.com/badges/image/million12/haproxy.svg)](http://microbadger.com/images/million12/haproxy)
 
-
-HAProxy docker container [million12/haproxy](https://registry.hub.docker.com/u/million12/haproxy/) with ALPN and HTTP/2 support.
-
-##### Build status (latest versions)
-
-* `latest` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=master)](https://travis-ci.org/million12/docker-haproxy)
-
-| 1.7.* | 1.6.* |
-|:-----:|:-----:|
-|       |       |
-|`1.7.5` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.7.5)](https://travis-ci.org/million12/docker-haproxy)|`1.6.12` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.6.12)](https://travis-ci.org/million12/docker-haproxy)|
-|`1.7.4` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.7.4)](https://travis-ci.org/million12/docker-haproxy)|`1.6.11` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.6.11)](https://travis-ci.org/million12/docker-haproxy)|
-|`1.7.3` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.7.3)](https://travis-ci.org/million12/docker-haproxy)|`1.6.10` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.6.10)](https://travis-ci.org/million12/docker-haproxy)|
-|`1.7.2` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.7.2)](https://travis-ci.org/million12/docker-haproxy)|`1.6.9` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.6.9)](https://travis-ci.org/million12/docker-haproxy)|
-|`1.7.1` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.7.1)](https://travis-ci.org/million12/docker-haproxy)|`1.6.8` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.6.8)](https://travis-ci.org/million12/docker-haproxy)|
-|`1.7.0` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.7.0)](https://travis-ci.org/million12/docker-haproxy)|`1.6.7` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.6.7)](https://travis-ci.org/million12/docker-haproxy)|
-|       |`1.6.6` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.6.6)](https://travis-ci.org/million12/docker-haproxy)|
-|       |`1.6.5` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.6.5)](https://travis-ci.org/million12/docker-haproxy)|
-|       |`1.6.4` - [![Build Status](https://travis-ci.org/million12/docker-haproxy.svg?branch=1.6.4)](https://travis-ci.org/million12/docker-haproxy)|
-
-
-### Tags
-Please specify tag when deploying for specific version.  
-Example:  
-
-`million12/haproxy:latest`  
-`million12/haproxy:1.6.4`
+HAProxy docker container with Lua, ALPN and HTTP/2 support. based on [million12](https://github.com/million12/docker-haproxy) image
 
 # Features
 
@@ -48,7 +13,7 @@ Example:
 * **Default [haproxy.cfg](container-files/etc/haproxy/haproxy.cfg) provided** for demonstration purposes. You can easily mount your own or point to different location using `HAPROXY_CONFIG` env.
 * **Auto restart when config changes**  
   This container comes with inotify to monitor changes in HAProxy config and **reload** HAProxy daemon. The reload is done in a way that no connection is lost.
-
+* Lua, to be able to use [haproxy-acme-validation-plugin](https://github.com/janeczku/haproxy-acme-validation-plugin)
 
 ## ENV variables
 

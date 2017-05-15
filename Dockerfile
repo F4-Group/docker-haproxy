@@ -72,6 +72,8 @@ ADD https://raw.githubusercontent.com/signalfx/collectd-haproxy/master/haproxy.p
 
 ENV HAPROXY_CONFIG /etc/haproxy/haproxy.cfg
 ENV COLLECTD_TCPCONNS_PORTS ""
+#set TERM enviroment for hatop
+ENV TERM linux
 
 EXPOSE 80 443
 

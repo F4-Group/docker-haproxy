@@ -61,4 +61,4 @@ ENV HAPROXY_CONFIG /etc/haproxy/haproxy.cfg
 
 EXPOSE 80 443
 
-ENTRYPOINT ["/bootstrap.sh"]
+CMD ["/bootstrap.sh"]

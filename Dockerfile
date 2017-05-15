@@ -59,6 +59,13 @@ RUN \
 #install collectd
 RUN yum install -y collectd
 
+#install hatop
+RUN \
+  wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/hatop/hatop-0.7.7.tar.gz && \
+  tar xvf hatop-0.7.7.tar.gz && \
+  cd hatop-0.7.7 && \
+  install -m 755 bin/hatop /usr/local/bin
+
 COPY container-files /
 
 ENV HAPROXY_CONFIG /etc/haproxy/haproxy.cfg

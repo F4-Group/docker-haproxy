@@ -4,6 +4,7 @@ MAINTAINER Marcin Ryzycki marcin@m12.io, Przemyslaw Ozgo linux@ozgo.info
 ENV HAPROXY_MJR_VERSION=1.7
 ENV HAPROXY_VERSION=1.7.5
 
+#install haproxy with new enough openssl & lua
 RUN \
   yum install -y epel-release && \
   yum update -y && \
@@ -55,9 +56,13 @@ RUN \
   yum remove -y make gcc pcre-devel && \
   yum clean all
 
+#install collectd
+RUN yum install -y collectd
+
 COPY container-files /
 
 ENV HAPROXY_CONFIG /etc/haproxy/haproxy.cfg
+ENV COLLECTD_TCPCONNS_PORTS ""
 
 EXPOSE 80 443
 

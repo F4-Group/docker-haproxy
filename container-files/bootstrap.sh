@@ -1,5 +1,6 @@
 #!/bin/sh
 
+set -e
 set -u
 
 # User params
@@ -10,7 +11,6 @@ HAPROXY_USER_PARAMS=$@
 HAPROXY_PID_FILE="/var/run/haproxy.pid"
 HAPROXY_CMD="/usr/local/sbin/haproxy -f ${HAPROXY_CONFIG} ${HAPROXY_USER_PARAMS} -D -p ${HAPROXY_PID_FILE}"
 HAPROXY_CHECK_CONFIG_CMD="/usr/local/sbin/haproxy -f ${HAPROXY_CONFIG} -c"
-
 
 #######################################
 # Echo/log function
@@ -32,6 +32,15 @@ print_config() {
   printf '=%.0s' {1..100} && echo
 }
 
+## collectd
+log "Starting Collectd"
+sed -i "s/\$HOSTNAME/$HOSTNAME/" /etc/collectd.conf
+sed -i "s/\$MONITORING_HOST/$MONITORING_HOST/" /etc/collectd.conf
+sed -i "s/\$COLLECTD_TCPCONNS_PORTS/$COLLECTD_TCPCONNS_PORTS/" /etc/collectd.conf
+log "Collectd Configuration:"
+cat /etc/collectd.conf
+collectd -C /etc/collectd.conf
+log "Collectd now running"
 
 # Launch HAProxy.
 # In the default attached haproxy.cfg `web.server` host is used for back-end nodes.

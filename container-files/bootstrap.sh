@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 set -u
@@ -36,7 +36,7 @@ print_config() {
 log "Starting Collectd"
 sed -i "s/\$HOSTNAME/$HOSTNAME/" /etc/collectd.conf
 sed -i "s/\$MONITORING_HOST/$MONITORING_HOST/" /etc/collectd.conf
-sed -i "s/\$COLLECTD_TCPCONNS_PORTS/$COLLECTD_TCPCONNS_PORTS/" /etc/collectd.conf
+sed -i "s#\$COLLECTD_TCPCONNS_PORTS#$COLLECTD_TCPCONNS_PORTS#" /etc/collectd.conf
 log "Collectd Configuration:"
 cat /etc/collectd.conf
 collectd -C /etc/collectd.conf

@@ -33,14 +33,14 @@ print_config() {
 }
 
 ## collectd
-log "Starting Collectd"
-sed -i "s/\$HOSTNAME/$HOSTNAME/" /etc/collectd.conf
-sed -i "s/\$MONITORING_HOST/$MONITORING_HOST/" /etc/collectd.conf
-sed -i "s#\$COLLECTD_TCPCONNS_PORTS#$COLLECTD_TCPCONNS_PORTS#" /etc/collectd.conf
-log "Collectd Configuration:"
-cat /etc/collectd.conf
-collectd -C /etc/collectd.conf
-log "Collectd now running"
+if [ -f /etc/collectd.conf ]; then
+  log "Starting Collectd"
+  cat /etc/collectd.conf
+  collectd -C /etc/collectd.conf
+  log "Collectd now running"
+else
+  log "Collectd configuration file not found, Collectd not started"
+fi
 
 # Launch HAProxy.
 # In the default attached haproxy.cfg `web.server` host is used for back-end nodes.
